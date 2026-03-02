@@ -171,6 +171,7 @@ export default function Gallery() {
                                         className="max-w-full max-h-[85vh] object-contain"
                                     />
                                 ) : (
+                                    // eslint-disable-next-line @next/next/no-img-element
                                     <img
                                         src={selectedMedia.src}
                                         alt="Fullscreen Memory"
