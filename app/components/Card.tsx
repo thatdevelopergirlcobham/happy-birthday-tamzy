@@ -26,8 +26,6 @@ const cardsData = [
 
                 <p>You live inside me.<br />I love you more than I love myself — and I think you know that.<br />I appreciate you.<br />I&apos;m always rooting for you, my future medical doctor.</p>
 
-                <p>And I made a queer library for you —<br />because love is not just a word.<br />It is something we build, protect, and grow.</p>
-
                 <p>It is us.<br />It is Eke Ntami-Eval Grace.</p>
             </div>
         )
