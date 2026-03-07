@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination, Navigation, Autoplay } from "swiper/modules";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Download } from "lucide-react";
+import { X, Download, ChevronLeft, ChevronRight } from "lucide-react";
 
 // Import Swiper styles
 import "swiper/css";
@@ -30,12 +30,29 @@ const mediaItems = [
 ];
 
 export default function Gallery() {
-    const [selectedMedia, setSelectedMedia] = useState<typeof mediaItems[0] | null>(null);
+    const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+    const selectedMedia = selectedIndex !== null ? mediaItems[selectedIndex] : null;
+
+    const handleNext = (e?: React.MouseEvent) => {
+        e?.stopPropagation();
+        if (selectedIndex !== null) {
+            setSelectedIndex((selectedIndex + 1) % mediaItems.length);
+        }
+    };
+
+    const handlePrev = (e?: React.MouseEvent) => {
+        e?.stopPropagation();
+        if (selectedIndex !== null) {
+            setSelectedIndex((selectedIndex - 1 + mediaItems.length) % mediaItems.length);
+        }
+    };
 
     // Close modal when pressing escape key
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === "Escape") setSelectedMedia(null);
+            if (e.key === "Escape") setSelectedIndex(null);
+            if (e.key === "ArrowRight") handleNext();
+            if (e.key === "ArrowLeft") handlePrev();
         };
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
@@ -82,7 +99,7 @@ export default function Gallery() {
                         {mediaItems.map((item, index) => (
                             <SwiperSlide
                                 key={index}
-                                onClick={() => setSelectedMedia(item)}
+                                onClick={() => setSelectedIndex(index)}
                                 className="!w-[280px] sm:!w-[320px] md:!w-[380px] lg:!w-[450px] !h-[400px] sm:!h-[500px] lg:!h-[600px] rounded-3xl overflow-hidden shadow-2xl shadow-red-900/20 border border-white/10 cursor-pointer group"
                             >
                                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center pointer-events-none">
@@ -129,7 +146,7 @@ export default function Gallery() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 bg-black/95 backdrop-blur-xl"
-                        onClick={() => setSelectedMedia(null)}
+                        onClick={() => setSelectedIndex(null)}
                     >
                         <motion.div
                             initial={{ scale: 0.9, opacity: 0 }}
@@ -152,13 +169,29 @@ export default function Gallery() {
                                     <Download className="w-5 h-5 sm:w-6 sm:h-6" />
                                 </a>
                                 <button
-                                    onClick={() => setSelectedMedia(null)}
+                                    onClick={() => setSelectedIndex(null)}
                                     title="Close View"
                                     className="p-3 bg-zinc-800 hover:bg-red-600 rounded-full text-white transition-all shadow-lg border border-white/10"
                                 >
                                     <X className="w-5 h-5 sm:w-6 sm:h-6" />
                                 </button>
                             </div>
+
+                            {/* Navigation Buttons */}
+                            <button
+                                onClick={handlePrev}
+                                className="absolute left-0 sm:-left-24 top-1/2 -translate-y-1/2 p-4 bg-zinc-800/50 hover:bg-red-600/80 rounded-full text-white transition-all z-50 backdrop-blur-sm border border-white/10 group"
+                                title="Previous"
+                            >
+                                <ChevronLeft className="w-8 h-8 group-hover:scale-110 transition-transform" />
+                            </button>
+                            <button
+                                onClick={handleNext}
+                                className="absolute right-0 sm:-right-24 top-1/2 -translate-y-1/2 p-4 bg-zinc-800/50 hover:bg-red-600/80 rounded-full text-white transition-all z-50 backdrop-blur-sm border border-white/10 group"
+                                title="Next"
+                            >
+                                <ChevronRight className="w-8 h-8 group-hover:scale-110 transition-transform" />
+                            </button>
 
                             {/* Media Content */}
                             <div className="w-full max-h-[85vh] rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(239,68,68,0.15)] border border-white/10 bg-black flex justify-center items-center">

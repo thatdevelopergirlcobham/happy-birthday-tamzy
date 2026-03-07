@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { X, Lock, Heart } from "lucide-react";
 
 const cardsData = [
     {
@@ -69,11 +69,39 @@ const cardsData = [
 
 export default function CardsSection() {
     const [selectedCard, setSelectedCard] = useState<typeof cardsData[0] | null>(null);
+    const [showPasscode, setShowPasscode] = useState(false);
+    const [passcode, setPasscode] = useState("");
+    const [isUnlocked, setIsUnlocked] = useState(false);
+    const [error, setError] = useState(false);
+
+    const handleReadMore = (card: typeof cardsData[0]) => {
+        if (isUnlocked) {
+            setSelectedCard(card);
+        } else {
+            setShowPasscode(true);
+            setSelectedCard(card); // Store which card they wanted to see
+        }
+    };
+
+    const handlePasscodeSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (passcode === "2008") {
+            setIsUnlocked(true);
+            setShowPasscode(false);
+            setError(false);
+        } else {
+            setError(true);
+            setPasscode("");
+        }
+    };
 
     // Close modal when pressing escape key
     React.useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === "Escape") setSelectedCard(null);
+            if (e.key === "Escape") {
+                setSelectedCard(null);
+                setShowPasscode(false);
+            }
         };
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
@@ -112,9 +140,10 @@ export default function CardsSection() {
                                         {card.shortText}
                                     </p>
                                     <button
-                                        onClick={() => setSelectedCard(card)}
-                                        className="w-full py-3.5 bg-red-600 hover:bg-red-500 text-white rounded-xl font-medium tracking-wide transition-colors duration-300 border border-red-400/50 shadow-[0_0_15px_rgba(239,68,68,0.3)]"
+                                        onClick={() => handleReadMore(card)}
+                                        className="w-full py-3.5 bg-red-600 hover:bg-red-500 text-white rounded-xl font-medium tracking-wide transition-colors duration-300 border border-red-400/50 shadow-[0_0_15px_rgba(239,68,68,0.3)] flex items-center justify-center gap-2"
                                     >
+                                        {!isUnlocked && <Lock className="w-4 h-4" />}
                                         Read More
                                     </button>
                                 </div>
@@ -142,26 +171,72 @@ export default function CardsSection() {
                             className="relative w-full max-w-2xl max-h-[85vh] overflow-hidden bg-zinc-900 rounded-3xl shadow-2xl border border-red-500/20 flex flex-col"
                             onClick={(e) => e.stopPropagation()}
                         >
-                            {/* Modal Header */}
-                            <div className="p-6 border-b border-white/10 flex justify-between items-center bg-zinc-900/80 backdrop-blur-md z-10 relative">
-                                <h3 className="text-2xl md:text-3xl font-bold text-red-300">
-                                    {selectedCard.title}
-                                </h3>
-                                <button
-                                    onClick={() => setSelectedCard(null)}
-                                    className="p-2 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
-                                >
-                                    <X className="w-6 h-6" />
-                                </button>
-                            </div>
+                            {showPasscode && !isUnlocked ? (
+                                <div className="p-8 md:p-12 flex flex-col items-center justify-center text-center space-y-6">
+                                    <div className="w-20 h-20 bg-red-500/10 rounded-full flex items-center justify-center mb-2">
+                                        <Lock className="w-10 h-10 text-red-500" />
+                                    </div>
+                                    <h3 className="text-3xl font-bold text-white">Private Message</h3>
+                                    <p className="text-gray-400 max-w-xs">
+                                        This letter is for my love only. Please enter the secret code to read.
+                                    </p>
 
-                            {/* Modal Body */}
-                            <div className="p-6 md:p-8 overflow-y-auto custom-scrollbar text-gray-200 leading-relaxed font-light text-[17px]">
-                                {selectedCard.content}
-                            </div>
+                                    <form onSubmit={handlePasscodeSubmit} className="w-full max-w-sm space-y-4">
+                                        <div className="relative">
+                                            <input
+                                                type="password"
+                                                value={passcode}
+                                                onChange={(e) => setPasscode(e.target.value)}
+                                                placeholder="Enter Secret Code"
+                                                className={`w-full bg-zinc-800 border-2 ${error ? 'border-red-500 animate-shake' : 'border-white/10'} rounded-2xl p-4 text-center text-2xl tracking-[0.5em] focus:outline-none focus:border-red-500 transition-all text-white placeholder:text-gray-600 placeholder:tracking-normal placeholder:text-base`}
+                                                autoFocus
+                                            />
+                                            {error && (
+                                                <p className="text-red-500 text-sm mt-2">Incorrect code. Try again.</p>
+                                            )}
+                                        </div>
+                                        <button
+                                            type="submit"
+                                            className="w-full py-4 bg-red-600 hover:bg-red-500 text-white rounded-2xl font-bold text-lg transition-all shadow-[0_0_20px_rgba(239,68,68,0.2)]"
+                                        >
+                                            Unlock Memory
+                                        </button>
+                                    </form>
 
-                            {/* Decorative gradient overlay at bottom of scroll */}
-                            <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-zinc-900 to-transparent pointer-events-none" />
+                                    <button
+                                        onClick={() => {
+                                            setSelectedCard(null);
+                                            setShowPasscode(false);
+                                        }}
+                                        className="text-gray-500 hover:text-gray-300 text-sm transition-colors"
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            ) : (
+                                <>
+                                    {/* Modal Header */}
+                                    <div className="p-6 border-b border-white/10 flex justify-between items-center bg-zinc-900/80 backdrop-blur-md z-10 relative">
+                                        <h3 className="text-2xl md:text-3xl font-bold text-red-300">
+                                            {selectedCard.title}
+                                        </h3>
+                                        <button
+                                            onClick={() => setSelectedCard(null)}
+                                            className="p-2 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
+                                        >
+                                            <X className="w-6 h-6" />
+                                        </button>
+                                    </div>
+
+                                    {/* Modal Body */}
+                                    <div className="p-6 md:p-8 overflow-y-auto custom-scrollbar text-gray-200 leading-relaxed font-light text-[17px]">
+                                        {selectedCard.content}
+                                    </div>
+
+                                    {/* Decorative gradient overlay at bottom of scroll */}
+                                    <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-zinc-900 to-transparent pointer-events-none" />
+                                </>
+                            )}
                         </motion.div>
                     </motion.div>
                 )}
