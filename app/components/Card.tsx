@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Lock, Heart } from "lucide-react";
+import { X, Lock } from "lucide-react";
 
 const cardsData = [
     {

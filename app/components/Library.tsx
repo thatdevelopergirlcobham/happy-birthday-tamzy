@@ -199,8 +199,6 @@ export default function Library() {
                         </motion.div>
                     ))}
                 </div>
-
-                {/* Footer Message */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
