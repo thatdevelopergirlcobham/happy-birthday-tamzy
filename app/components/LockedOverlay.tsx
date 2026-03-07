@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Lock, Heart } from "lucide-react";
+import { Lock } from "lucide-react";
 
 export default function LockedOverlay() {
     const [timeLeft, setTimeLeft] = useState({
