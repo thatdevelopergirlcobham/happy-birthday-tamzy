@@ -1,0 +1,171 @@
+﻿
+> mytamzy@0.1.0 build
+> next build
+
+  Γû▓ Next.js 14.2.35
+
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully
+   Linting and checking validity of types ...
+node.exe : 
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~
+    + CategoryInfo          : 
+    NotSpecified: (:String)   
+  [], RemoteException
+    + FullyQualifiedErrorId : 
+    NativeCommandError
+ 
+Failed to compile.
+
+./app/components/Card.tsx
+5:19  Error: 'Heart' is 
+defined but never used.  @type
+script-eslint/no-unused-vars
+
+./app/components/EnvelopeLette
+rs.tsx
+5:36  Error: 'ChevronLeft' is 
+defined but never used.  @type
+script-eslint/no-unused-vars
+5:49  Error: 'ChevronRight' 
+is defined but never used.  @t
+ypescript-eslint/no-unused-var
+s
+6:10  Error: 'Swiper' is 
+defined but never used.  @type
+script-eslint/no-unused-vars
+6:18  Error: 'SwiperSlide' is 
+defined but never used.  @type
+script-eslint/no-unused-vars
+7:10  Error: 'Pagination' is 
+defined but never used.  @type
+script-eslint/no-unused-vars
+7:22  Error: 'Navigation' is 
+defined but never used.  @type
+script-eslint/no-unused-vars
+205:21  Warning: Using 
+`<img>` could result in 
+slower LCP and higher 
+bandwidth. Consider using 
+`<Image />` from `next/image` 
+to automatically optimize 
+images. This may incur 
+additional usage or cost from 
+your provider. See: https://ne
+xtjs.org/docs/messages/no-img-
+element  
+@next/next/no-img-element
+216:21  Warning: Using 
+`<img>` could result in 
+slower LCP and higher 
+bandwidth. Consider using 
+`<Image />` from `next/image` 
+to automatically optimize 
+images. This may incur 
+additional usage or cost from 
+your provider. See: https://ne
+xtjs.org/docs/messages/no-img-
+element  
+@next/next/no-img-element
+227:21  Warning: Using 
+`<img>` could result in 
+slower LCP and higher 
+bandwidth. Consider using 
+`<Image />` from `next/image` 
+to automatically optimize 
+images. This may incur 
+additional usage or cost from 
+your provider. See: https://ne
+xtjs.org/docs/messages/no-img-
+element  
+@next/next/no-img-element
+238:21  Warning: Using 
+`<img>` could result in 
+slower LCP and higher 
+bandwidth. Consider using 
+`<Image />` from `next/image` 
+to automatically optimize 
+images. This may incur 
+additional usage or cost from 
+your provider. See: https://ne
+xtjs.org/docs/messages/no-img-
+element  
+@next/next/no-img-element
+249:21  Warning: Using 
+`<img>` could result in 
+slower LCP and higher 
+bandwidth. Consider using 
+`<Image />` from `next/image` 
+to automatically optimize 
+images. This may incur 
+additional usage or cost from 
+your provider. See: https://ne
+xtjs.org/docs/messages/no-img-
+element  
+@next/next/no-img-element
+260:21  Warning: Using 
+`<img>` could result in 
+slower LCP and higher 
+bandwidth. Consider using 
+`<Image />` from `next/image` 
+to automatically optimize 
+images. This may incur 
+additional usage or cost from 
+your provider. See: https://ne
+xtjs.org/docs/messages/no-img-
+element  
+@next/next/no-img-element
+390:74  Error: 'index' is 
+defined but never used.  @type
+script-eslint/no-unused-vars
+
+./app/components/Gallery.tsx
+59:8  Warning: React Hook 
+useEffect has missing 
+dependencies: 'handleNext' 
+and 'handlePrev'. Either 
+include them or remove the 
+dependency array.  
+react-hooks/exhaustive-deps
+
+./app/components/Library.tsx
+133:37  Warning: Using 
+`<img>` could result in 
+slower LCP and higher 
+bandwidth. Consider using 
+`<Image />` from `next/image` 
+to automatically optimize 
+images. This may incur 
+additional usage or cost from 
+your provider. See: https://ne
+xtjs.org/docs/messages/no-img-
+element  
+@next/next/no-img-element
+213:33  Error: `"` can be 
+escaped with `&quot;`, 
+`&ldquo;`, `&#34;`, 
+`&rdquo;`.  
+react/no-unescaped-entities
+213:64  Error: `'` can be 
+escaped with `&apos;`, 
+`&lsquo;`, `&#39;`, 
+`&rsquo;`.  
+react/no-unescaped-entities
+213:78  Error: `"` can be 
+escaped with `&quot;`, 
+`&ldquo;`, `&#34;`, 
+`&rdquo;`.  
+react/no-unescaped-entities
+
+info  - Need to disable some 
+ESLint rules? Learn more 
+here: https://nextjs.org/docs/
+basic-features/eslint#disablin
+g-rules
