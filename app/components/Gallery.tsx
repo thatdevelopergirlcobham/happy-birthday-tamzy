@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination, Navigation, Autoplay } from "swiper/modules";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Download, ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 // Import Swiper styles
 import "swiper/css";
@@ -33,19 +34,19 @@ export default function Gallery() {
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
     const selectedMedia = selectedIndex !== null ? mediaItems[selectedIndex] : null;
 
-    const handleNext = (e?: React.MouseEvent) => {
+    const handleNext = React.useCallback((e?: React.MouseEvent) => {
         e?.stopPropagation();
         if (selectedIndex !== null) {
             setSelectedIndex((selectedIndex + 1) % mediaItems.length);
         }
-    };
+    }, [selectedIndex]);
 
-    const handlePrev = (e?: React.MouseEvent) => {
+    const handlePrev = React.useCallback((e?: React.MouseEvent) => {
         e?.stopPropagation();
         if (selectedIndex !== null) {
             setSelectedIndex((selectedIndex - 1 + mediaItems.length) % mediaItems.length);
         }
-    };
+    }, [selectedIndex]);
 
     // Close modal when pressing escape key
     useEffect(() => {
@@ -56,7 +57,7 @@ export default function Gallery() {
         };
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
-    }, []);
+    }, [handleNext, handlePrev]);
 
     return (
         <section className="bg-black py-20 px-4 sm:px-6 lg:px-8 relative z-10 overflow-hidden">
@@ -119,10 +120,11 @@ export default function Gallery() {
                                     />
                                 ) : (
                                     // eslint-disable-next-line @next/next/no-img-element
-                                    <img
+                                    <Image
                                         src={item.src}
                                         alt={`Memory ${index + 1}`}
-                                        className="w-full h-full object-cover"
+                                        fill
+                                        className="object-cover"
                                     />
                                 )}
                             </SwiperSlide>
@@ -205,9 +207,11 @@ export default function Gallery() {
                                     />
                                 ) : (
                                     // eslint-disable-next-line @next/next/no-img-element
-                                    <img
+                                    <Image
                                         src={selectedMedia.src}
                                         alt="Fullscreen Memory"
+                                        width={1200}
+                                        height={800}
                                         className="max-w-full max-h-[85vh] object-contain"
                                     />
                                 )}

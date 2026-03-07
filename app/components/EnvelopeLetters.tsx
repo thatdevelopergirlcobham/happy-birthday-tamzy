@@ -2,9 +2,8 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Heart, Mail, Download, ChevronLeft, ChevronRight } from "lucide-react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation } from "swiper/modules";
+import { X, Heart, Mail, Download } from "lucide-react";
+import Image from "next/image";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
@@ -202,7 +201,7 @@ const lettersData: Letter[] = [
         content: (
             <div className="flex flex-col items-center">
                 <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden shadow-2xl border-4 border-white mb-2">
-                    <img src="/1.jpeg" alt="Memory" className="w-full h-full object-cover" />
+                    <Image src="/1.jpeg" alt="Memory" fill className="object-cover" />
                 </div>
             </div>
         )
@@ -213,7 +212,7 @@ const lettersData: Letter[] = [
         content: (
             <div className="flex flex-col items-center">
                 <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden shadow-2xl border-4 border-white mb-2">
-                    <img src="/2.jpeg" alt="Memory" className="w-full h-full object-cover" />
+                    <Image src="/2.jpeg" alt="Memory" fill className="object-cover" />
                 </div>
             </div>
         )
@@ -224,7 +223,7 @@ const lettersData: Letter[] = [
         content: (
             <div className="flex flex-col items-center">
                 <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden shadow-2xl border-4 border-white mb-2">
-                    <img src="/3.jpeg" alt="Memory" className="w-full h-full object-cover" />
+                    <Image src="/3.jpeg" alt="Memory" fill className="object-cover" />
                 </div>
             </div>
         )
@@ -235,7 +234,7 @@ const lettersData: Letter[] = [
         content: (
             <div className="flex flex-col items-center">
                 <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden shadow-2xl border-4 border-white mb-2">
-                    <img src="/4.jpeg" alt="Memory" className="w-full h-full object-cover" />
+                    <Image src="/4.jpeg" alt="Memory" fill className="object-cover" />
                 </div>
             </div>
         )
@@ -246,7 +245,7 @@ const lettersData: Letter[] = [
         content: (
             <div className="flex flex-col items-center">
                 <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden shadow-2xl border-4 border-white mb-2">
-                    <img src="/5.jpeg" alt="Memory" className="w-full h-full object-cover" />
+                    <Image src="/5.jpeg" alt="Memory" fill className="object-cover" />
                 </div>
             </div>
         )
@@ -257,7 +256,7 @@ const lettersData: Letter[] = [
         content: (
             <div className="flex flex-col items-center">
                 <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden shadow-2xl border-4 border-white mb-2">
-                    <img src="/6.jpeg" alt="Memory" className="w-full h-full object-cover" />
+                    <Image src="/6.jpeg" alt="Memory" fill className="object-cover" />
                 </div>
             </div>
         )
@@ -387,7 +386,7 @@ export default function EnvelopeLetters() {
                 {/* Vertical Stack Layout */}
                 <div className="flex flex-col items-center space-y-16 max-w-md mx-auto relative">
                     <AnimatePresence mode="popLayout">
-                        {lettersData.slice(0, visibleCount).map((letter, index) => (
+                        {lettersData.slice(0, visibleCount).map((letter) => (
                             <motion.div
                                 key={letter.id}
                                 layout

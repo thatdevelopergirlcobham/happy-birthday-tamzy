@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Book, ExternalLink, GraduationCap, Heart, Quote, Download } from "lucide-react";
+import Image from "next/image";
 
 interface BookItem {
     title: string;
@@ -130,10 +131,11 @@ export default function Library() {
                             {/* Book Cover/Placeholder */}
                             <div className="relative aspect-[16/10] overflow-hidden bg-zinc-800">
                                 {book.image ? (
-                                    <img
+                                    <Image
                                         src={book.image}
                                         alt={book.title}
-                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                        fill
+                                        className="object-cover transition-transform duration-500 group-hover:scale-110"
                                     />
                                 ) : (
                                     <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-zinc-800 to-zinc-900">
@@ -208,7 +210,7 @@ export default function Library() {
                         <div className="bg-zinc-950 rounded-[14px] px-8 py-6 relative">
                             <Quote className="absolute -top-4 -left-4 w-8 h-8 text-red-500 opacity-30" />
                             <p className="text-gray-300 italic text-lg lg:text-xl">
-                                "Happy Birthday and Happy Women's Day my love"
+                                &quot;Happy Birthday and Happy Women&apos;s Day my love&quot;
                             </p>
                         </div>
                     </div>

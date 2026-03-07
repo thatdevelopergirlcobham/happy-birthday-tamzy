@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { X, Lock } from "lucide-react";
 
 const cardsData = [
@@ -125,11 +126,11 @@ export default function CardsSection() {
                             className="relative group rounded-3xl overflow-hidden shadow-2xl shadow-red-900/20 bg-zinc-900 aspect-[3/4]"
                         >
                             {/* Image background */}
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
+                            <Image
                                 src={card.image}
                                 alt={card.title}
-                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                fill
+                                className="object-cover transition-transform duration-700 group-hover:scale-105"
                             />
 
                             {/* Blurred Bottom Section */}
